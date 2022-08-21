@@ -330,12 +330,16 @@ console.log(arrMap);
 //const arrsum1 = arr.reduce( (pvalue,cvalue,index, array  ) => () , initValue );
 //const arrsum2 = arr.reduce( (pvalue,cvalue,index, array  ) => () , initValue );
 //const arrsum3 = arr.reduce( (pvalue,cvalue,index, array  ) => () , initValue );
-
+/*
 const arrsum = arr.reduce( (pvalue,cvalue,index, array  ) => {
-    debugger;
+   // debugger;
     return pvalue + cvalue;
-}, -1 );
+}, 0 );
+console.log(arrsum); //12958*/
 
+
+const arrsum = arr.reduce( (pvalue,cvalue) => ( pvalue + cvalue ), 0 );
+console.log(arrsum); //12958
 
 
 // findIndex() 메서드 사용법을 학습한다.
