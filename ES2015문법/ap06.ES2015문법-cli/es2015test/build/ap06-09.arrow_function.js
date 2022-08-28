@@ -1,0 +1,58 @@
+"use strict";
+
+/*
+
+        ES6 의 화살표 사용법을 학습한다.
+
+        ES 5에서는
+        arguments 매개변수는 유사 배열 객체다.
+            length 프로퍼티가 있다.
+            Array  메서드를 사용할 수 없다.
+            arrow function에서는 arguments는 사용할 수 없다.
+
+        ES 6에서는
+        rest 매개변수는 배열이다.
+            rest 연산자(...)를 사용하여 함수의 매개변수를 작성한 형태다.
+            함수의 매개변수로 넘어오는 값들을 "배열"로 만든다.
+
+        Spread 연산자는 ... 이다.
+            이터러블(iterable) 객체를 "개별" 요소로 분리
+            이터러블(iterable) 객체에는 Array, String, Map, Set 등이 있다.
+            iterator를 생성해서 next()로 순회할 수 있는 자료구조가 이터러블
+
+*/
+var func1 = function func1(a, b) {
+  return a + b;
+};
+
+console.log(func1(3, 4));
+
+var func2 = function func2(a, b) {
+  return a + b;
+};
+
+console.log(func2(3, 4));
+
+var func3 = function func3(a, b) {
+  return a + b;
+};
+
+console.log(func3(3, 4)); // ES5 로 작성
+
+var addNumber1 = function addNumber1(num) {
+  return function (value) {
+    return num + value;
+  };
+};
+
+var addTwo = addNumber1(2);
+var result = addTwo(4); // 6
+// 화살표 함수로 변환한 예
+
+var addNumber2 = function addNumber2(num) {
+  return function (value) {
+    return num + value;
+  };
+};
+
+var result2 = addNumber1(2)(4); // 6

@@ -1,10 +1,11 @@
 'use strict';
 
-var name = 'world';
-console.log('Hello '.concat(name));
+debugger;
 
-var getMessage = function getMessage(params) {
-    console.log('Hello '.concat(params));
+const name = 'world';
+console.log(`Hello ${name}`);
+
+const getMessage = (params) => {
+  console.log(`Hello ${params}`);
 };
-
 getMessage('sejoong');
