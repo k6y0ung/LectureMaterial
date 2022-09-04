@@ -7,7 +7,6 @@
 
 <script>
 import Vue3403Comp from '../components/Vue3403Comp.vue';
-
 export default {
     /* pdtmc^2w */
     props: [],
