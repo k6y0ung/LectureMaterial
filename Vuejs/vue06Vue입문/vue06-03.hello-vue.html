@@ -18,11 +18,8 @@
         Hello, Vue!!! 를 출력하시오.
 
         작업 순서
-        . 스크립트 플러그인 임포트 (단축키: vueplugin)
-
-        <!-- vue 플러그인 임포트   -->
-
-        . Vue 인스턴스 생성 (단축키:vuei)
+        . 스크립트 플러그인 임포트(단축키: vueplugin)
+        . Vue 인스턴스 생성(단축키: vuei)
         . el, data, methods 에 프로퍼티 설정
             el: 태그 찾기
             data : 변수(상태) 설정
@@ -43,25 +40,25 @@
     </div>
 </body>
 
+</html>
+
+
 <!-- vue 플러그인 임포트   -->
-
-   <!-- vue 플러그인 임포트   -->
-   <script src="https://unpkg.com/vue@2.7.8/dist/vue.js">/* vue 플러그인 임포트 */</script>
-
-   <script>
+<script src="https://unpkg.com/vue@2.7.8/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script>
     new Vue({
         /* edtmc^2w */
         el: '#app',
         data: {
             /* 인스턴스 안에서 사용되는 변수 등록, 공유 변수 */
-            message:'Hellow,m Vue.js!',
+            message: 'Hello, vue!!!',
         },
         //template: ``,
         methods: {
             /* 이벤트 핸들러 등록 + 일반 함수 */
             clickBtn(){
-               /* alert("clickBtn");*/
-               this.$data.message = 'hi,kayoung';
+                // alert("clickBtn");
+                this.$data.message = 'hi, sejoong';
             }
         },
         components: {
@@ -85,5 +82,5 @@
         },
     });
 
-    </script>
-</html>
+</script>
+

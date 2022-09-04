@@ -157,10 +157,9 @@
             change4(){
                 console.log(event.target);
                 // [500, 3, 4, 5, 70]      <== 방법4을 적용
-
-                const newarr =  [500, ...this.$data.arr, 70];
-                // this.$data.arr = newarr;
-                this.$set (this.$data, 'arr',newarr)
+                const newarr = [ 500, ...this.$data.arr, 70];
+                //          this.$data.arr  = newarr;
+                this.$set (this.$data, 'arr', newarr);
             },
         },
         components: {
@@ -185,3 +184,4 @@
     });
 
 </script>
+

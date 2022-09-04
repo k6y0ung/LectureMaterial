@@ -15,23 +15,7 @@
 
     Spread 연산자는 ... 이다.
         이터러블(iterable) 객체를 "개별" 요소로 분리
-        이터러블(iterable) 객체에는 object, Array, String, Map, Set 등이 있다.
+        이터러블(iterable) 객체에는 Array, String, Map, Set 등이 있다.
         iterator를 생성해서 next()로 순회할 수 있는 자료구조가 이터러블
 
 */
-
-const cities = ['서울', '부산', '제주'];
-const x = cities[0]; //서울
-const y = cities[1];
-const z = cities[2];
-
-console.log(cities[0], cities[1], cities[2]);
-console.log(...cities); //'서울', '부산', '제주'
-
-const east = ['u', 'k', 't'];
-const wesr = ['n', 'c', 'g'];
-
-console.log(easr.concat(west));
-
-const countries = [...easr, ...west];
-console.log(countries);

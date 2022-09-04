@@ -14,8 +14,9 @@ export default {
     props: [],
     data() {
         /* 컴포넌트 안에서 사용되는 변수 등록. 개별 변수 */
+        /* data 프로퍼티 값 변경시 this.set(object, key, value) 을 사용 */
         return {
-            message: 'heelo,vue!!'
+            message: 'Hello, vue.js!!!'
         };
     },
     //template: ``,

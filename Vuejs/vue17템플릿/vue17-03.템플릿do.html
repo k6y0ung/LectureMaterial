@@ -49,6 +49,7 @@
         <div id="app2">
             <!-- template 프로퍼티를 이용하는 방식-->
             사랑해~~~
+            <p>{{ message }}</p>
         </div>
 
         <hr>
@@ -62,27 +63,22 @@
 
 </html>
 
-<!-- vue template -->
 
 <!-- vue 플러그인 임포트   -->
 <script src="https://unpkg.com/vue@2.7.8/dist/vue.js">/* vue 플러그인 임포트 */</script>
-<script src="https://unpkg.com/vuex@3.6.2/dist/vuex.js"> /* vuex 플러그인 임포트 */</script>
-<script src="https://unpkg.com/vue-router@3.5.4/dist/vue-router.js"> /* vue 라우터 플러그인 임포트 */</script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"> /* axios 플러그인 임포트 */</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> /* jQuery 플러그인 임포트 */</script>
 <script>
     new Vue({
         /* edtmc^2w */
         el: '#app2',
         data: {
             /* 인스턴스 안에서 사용되는 변수 등록, 공유 변수 */
-            message2:'aaaaaaaaaaa',
+            /* data 프로퍼티 값 변경시 this.set(object, key, value) 을 사용 */
+            message2: 'aaaaaa',
         },
-        template:  `
+        template: `
             <i>
                 template 속성을 이용한 데이터 출력. {{message2}}
             </i>
-
         ` ,
         methods: {
             /* 이벤트 핸들러 등록 + 일반 함수 */
@@ -110,6 +106,3 @@
     });
 
 </script>
-
-
-<!-- vue 플러그인 임포트   -->
