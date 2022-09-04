@@ -1,5 +1,5 @@
 <template>
-    <footer>Footer Componet</footer>
+    <aside>Aside Componet</aside>
 </template>
 
 <script>

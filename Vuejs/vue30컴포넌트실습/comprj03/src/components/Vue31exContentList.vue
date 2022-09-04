@@ -1,5 +1,5 @@
 <template>
-    <footer>Footer Componet</footer>
+    <div id="content-list">List Componet</div>
 </template>
 
 <script>
