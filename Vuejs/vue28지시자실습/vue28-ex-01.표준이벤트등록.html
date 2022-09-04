@@ -45,7 +45,10 @@
 
     주요 학습 사항
     1. vue 지시자 작성을 연습한다.
+        v-on, v-bind, v-for
     2. 이벤트 취소를 연습한다.
+        event.stopPropagation();
+        event.preventDefault();
 
     문제1.
     a 를 클릭하면 href 에 있는 값을 "img2"영역 에 나오게 하시오
@@ -103,8 +106,8 @@
             이미지 위에 마우스를 내리면(mouseout ) ==> ../images/but1.gif , ../images/img_swap_off.png
             이미지 위에 마우스를 올리면(mouseover) ==> ../images/but2.gif , ../images/img_swap_on.png
         </xmp>
-        <img src="img_but1" id="but1"     mouseover="imageover" mouseout="imageout" />
-        <img src="img_swap" id="img-swap" mouseover="imageover" mouseout="imageout" />
+        <img v-bind:src="img_but1" id="but1"     v-on:mouseover="imageover" v-on:mouseout="imageout" />
+        <img v-bind:src="img_swap" id="img-swap" v-on:mouseover="imageover" v-on:mouseout="imageout" />
         <hr />
 
         <xmp>
@@ -112,21 +115,27 @@
             span에 mousedown 이벤트 핸들러를 추가하시오. ==> 이벤트 핸들러명 spanmousedown. background-color 를 blue 로 설정
             span에 mouseup 이벤트 핸들러를 추가하시오.   ==> 이벤트 핸들러명 spanmouseup.   background-color 를 pink 로 설정
             span에 mouseout 이벤트 핸들러를 추가하시오.  ==> 이벤트 핸들러명 spanmouseout.  background-color 를 red 로 설정
+
+            css 표기법을 JS 표기법으로 바꾸는 방법을 배운다.
+            <span style="background-color: yellow;"></span>
+            1. 대문자  background-color ===> backgroundColor
+            2. 문자열  yellow           ===> "yellow"
+            3. 콤마    ;                ===> ,
         </xmp>
-        <span mouseover= "spanmouseover"
-              mousedown= "spanmousedown"
-              mouseup  = "spanmouseup"
-              mouseout = "spanmouseout" >
+        <span v-on:mouseover= "spanmouseover"
+              v-on:mousedown= "spanmousedown"
+              v-on:mouseup  = "spanmouseup"
+              v-on:mouseout = "spanmouseout" >
         </span>
-        <span mouseover= "spanmouseover"
-              mousedown= "spanmousedown"
-              mouseup  = "spanmouseup"
-              mouseout = "spanmouseout" >
+        <span v-on:mouseover= "spanmouseover"
+              v-on:mousedown= "spanmousedown"
+              v-on:mouseup  = "spanmouseup"
+              v-on:mouseout = "spanmouseout" >
         </span>
-        <span mouseover= "spanmouseover"
-              mousedown= "spanmousedown"
-              mouseup  = "spanmouseup"
-              mouseout = "spanmouseout">
+        <span v-on:mouseover= "spanmouseover"
+              v-on:mousedown= "spanmousedown"
+              v-on:mouseup  = "spanmouseup"
+              v-on:mouseout = "spanmouseout">
         </span>
         <hr />
 
@@ -138,13 +147,15 @@
             "vue23-01.v-for와배열.html" 를 참조하여 option 부분을 v-for 를 사용하도록 수정하시오.
 
         </xmp>
-        <select id="sel" change="selectchange">
-            <option value="../images/strawberry.gif">딸기</option>
-            <option value="../images/banana.gif">바나나</option>
-            <option value="../images/apple.gif" selected>사과</option>
+        <select id="sel" v-on:change="selectchange" v-model:selected="img_select">
+            <option v-for=" (option, index) in options"
+                    v-bind:key= "index"
+                    v-bind:value="option.value">
+                    {{option.text}}
+            </option>
         </select>
 
-        <img id="img" src="img_select" />
+        <img id="img" v-bind:src="img_select" />
         <hr />
 
         <xmp>
@@ -169,7 +180,16 @@
     new Vue({
         el: '#app',
         data: {
+            /* 인스턴스 안에서 사용되는 변수 등록, 공유 변수 */
             img_image3: null,
+            img_but1: '../images/but1.gif',
+            img_swap: '../images/img_swap_off.png',
+            img_select: '../images/apple.gif',
+            options:[
+                {text:'딸기', value:'../images/strawberry.gif'},
+                {text:'바나나', value:'../images/banana.gif'},
+                {text:'사과', value:'../images/apple.gif'},
+            ],
         },
         //template: ``,
         methods: {
@@ -187,7 +207,53 @@
                 // a 태그의 페이지 이동 기능을 중지.
                 event.preventDefault();
                 event.stopPropagation();
-
+            },
+            imageover(e){
+                console.log(e.target);
+                // 이미지 위에 마우스를 올리면(mouseover)
+                // ==> ../images/but2.gif , ../images/img_swap_on.png
+                if( e.target.id === 'but1')
+                    this.$data.img_but1 = '../images/but2.gif';
+                else
+                    this.$data.img_swap = '../images/img_swap_on.png';
+            },
+            imageout(e){
+                console.log(e.target);
+                // 이미지 위에 마우스를 내리면(mouseout )
+                // ==> ../images/but1.gif , ../images/img_swap_off.png
+                if( e.target.id === 'but1')
+                    this.$data.img_but1 = '../images/but1.gif';
+                else
+                    this.$data.img_swap = '../images/img_swap_off.png';
+            },
+            spanmouseover(e){
+                console.log(e.target);
+                // background-color 를 yellow 로 설정
+                // style="background=color: yellow;"
+                e.target.style.backgroundColor= "yellow";
+            },
+            spanmousedown(e){
+                console.log(e.target);
+                // background-color 를 blue 로 설정
+                // style="background=color: blue;"
+                e.target.style.backgroundColor= "blue";
+            },
+            spanmouseup(e){
+                console.log(e.target);
+                // background-color 를 pink 로 설정
+                // style="background=color: pink;"
+                e.target.style.backgroundColor= "pink";
+            },
+            spanmouseout(e){
+                console.log(e.target);
+                // background-color 를 red 로 설정
+                // style="background=color: red;"
+                e.target.style.backgroundColor= "red";
+            },
+            selectchange(e){
+                console.log(e.target); // <select
+                console.log(e.target.value); // <option value=""
+                this.$data.img_select = e.target.value;
             },
         },
         components: {
