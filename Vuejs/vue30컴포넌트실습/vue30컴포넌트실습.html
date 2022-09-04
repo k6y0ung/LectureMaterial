@@ -315,6 +315,33 @@
           <template>
           </template>
 
+
+        ##################################
+        4. Vue3403 작업. [참조]page 68
+          자식 컴포넌트 에서 <button v-on:click="showLog">show</button> 을 클릭하면
+          show-log 라는 사용자 이벤트를 발생시키고
+          "abc" 와 123 을 값으로 전달하시오
+        ##################################
+        src/App.vue 수정 ==> 페이지 링크 만들기
+
+        src/router/index.js  수정 ==> url 과 컴포넌트 연결
+
+        src/views/View3403View.vue 생성(부모 컴포넌트)
+          <template>
+            <div id="app">
+                자식 컴포넌트에서 받은 값: {{mesg}}
+                <child-component v-on:showLog="printText"></child-component>
+            </div>
+          </template>
+
+        src/components/View3403Comp.vue 생성(자식 컴포넌트)
+          <template>
+            <div>
+                <button v-on:click="showLog">show</button>
+            </div>
+          </template>
+
+
         ##################################
         4. 프로젝트 초기 설정. page 133~134
         ##################################
