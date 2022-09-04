@@ -200,9 +200,32 @@
         src/router/index.js  수정 ==> url 과 컴포넌트 연결
 
         src/views/View3103View.vue 생성
+          <template>
+            <div id="app">
+                <h2>컴포넌트 등록</h2>
+                <Vue3103Comp v-bind:localmsg="localmsg1"></Vue3103Comp>
+                <Vue3103Comp v-bind:localmsg="localmsg2"></Vue3103Comp>
+            </div>
+          </template>
 
         src/components/View3103Comp.vue 생성
-        
+          <style scoped>
+              span {
+                  border: 1px dashed blue;
+                  background-color:lightgray;
+                  padding: 5px;
+              }
+          </style>
+
+          <template>
+              <div>
+                  지역 컴포넌트가 등록되었습니다!
+                  <span onclick="lclick">
+                      {{ localmsg }}
+                  </span>
+              </div>
+          </template>
+
         ##################################
         4. Vue3104
         ##################################
@@ -211,7 +234,6 @@
         src/router/index.js  수정 ==> url 과 컴포넌트 연결
 
         src/views/View3104View.vue 생성
-        
           <template>
             <div id="app">
                 <p>
@@ -227,14 +249,52 @@
           </template>
 
         src/components/View3104Counter.vue 생성
-        
+          <style scoped>
+              span.box {
+                  display: inline-block;
+                  font-size: 3em;
+                  border: 1px dashed blue;
+                  padding: 10px 20px;
+                  margin: 5px;
+                  text-align: center;
+              }
+          </style>
+
           <template>
-            <span style="display:inline-block; font-size:3em; border:1px dashed blue; padding:10px 20px; margin:5px; text-align:center;">
-                {{num}}
-            </span>
+              <span class="box">
+                  {{ num }}
+              </span>
           </template>
 
 
+        ##################################
+        4. Vue31ex
+        ##################################
+        src/App.vue 수정 ==> 페이지 링크 만들기
+
+        src/router/index.js  수정 ==> url 과 컴포넌트 연결
+
+        src/views/Vue31exView.vue 생성
+          <style scoped>
+
+          </style>
+
+          <template>
+
+          </template>
+
+        src/components/Vue31exComponentHeader.vue 생성
+          <template>
+          </template>
+
+
+        src/components/Vue31exComponentContent.vue 생성
+          <template>
+          </template>
+
+        src/components/Vue31exComponentFooter.vue 생성
+          <template>
+          </template>
 
 
         ##################################

@@ -1,3 +1,11 @@
+<style scoped>
+span {
+    border: 1px dashed blue;
+    background-color: lightgray;
+    padding: 5px;
+}
+</style>
+
 <template>
     <div>
         지역 컴포넌트가 등록되었습니다!

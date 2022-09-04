@@ -5,7 +5,6 @@
         </p>
         <p>
             <b v-for="(val, i) in arr" v-bind:key="i">
-                {{ val }}
                 <component-box v-bind:num="val"></component-box>
             </b>
         </p>
@@ -13,7 +12,7 @@
 </template>
 
 <script>
-import Vue3104Counter from '../components/View3104Counter.vue';
+import Vue3104Counter from '../components/Vue3104Counter.vue';
 
 export default {
     /* pdtmc^2w */
