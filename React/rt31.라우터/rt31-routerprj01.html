@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>React CLI Sample</title>
+
+    <link rel="stylesheet" href="../css/App.css"/>
+
+</head>
+<body>
+    <xmp>
+    create-react-app 를 배우고 프로젝트를 만들어 라우팅을 적용하여 본다.
+    ##################################
+    # create-react-app 학습하기
+    ##################################
+
+
+    create-react-app 버전 확인 :
+        npx create-react-app -V
+
+
+    프로젝트 생성 :
+        npx create-react-app 프로젝트명
+
+
+    모듈(패키지) 추가
+        npm install --save 플러그인명.
+        예시) npm install --save redux
+
+
+    ##################################
+    step 1 create-react-app 프로젝트 생성 및 설정 작업
+    ##################################
+        step 1-01. npx create-react-app -V                   # create-react-app 버전 확인
+        5.0.1
+
+        step 1-02. npx create-react-app routerprj01          # React 프로젝트 생성. package.json 생성.
+            Creating a new React app.
+            Installing packages. This might take a couple of minutes.
+            Installing react, react-dom, and react-scripts with cra-template...
+
+        step 1-03. cd routerprj01                            # 폴더 이동
+
+        step 1-04. prop-types 설치(필수)
+            prop-types는 컴포넌트 속성값, props 의 타입을 정의할 때 사용되는 라이브러리.
+
+            $ npm install --save prop-types
+
+        step 1-05. styled-component
+            styled-components 는 CSS 표기법을 사용하여 인라인 스타일링을 만들 수 있게 해주는 라이브러리.
+
+            $ npm install --save styled-components
+
+        step 1-06. Axios
+            $ npm install axios --save
+
+        step 1-07. 웹용 라우터 react-router-dom 패키지 설치
+            $ npm install react-router-dom --save
+
+        step 1-08. npm install                         # 다운로드 & node_modules 폴더 생성
+
+        step 1-09. npm run start                       # 프로젝트 실행
+
+        step 1-10. npm run build                       # 웹팩 빌드. /dist/ 에 파일 만들어짐.
+
+
+    ##################################
+    step 2. 프로젝트 폴더 구조
+    ##################################
+        |-- dist                     # 빌드 결과물 폴더
+        |-- node_modules             # npm 모듈(패키지) 저장 폴더
+        |-- public                   # 배포 버전을 빌드할 때 사용하는 파일
+        |   |---- favicon.ico
+        |   |---- index.html
+        |   |---- logo192.png
+        |   |---- logo512.png
+        |   |---- manifest.json
+        |   `---- robots.txt
+        |---- src                      # 소스 코드 폴더
+        |   |---- components           <== 폴더 추가
+        |   |---- pages                <== 폴더 추가
+        |   |---- App.css              <== 파일 삭제
+        |   |---- App.js
+        |   |---- App.test.js          <== 파일 삭제
+        |   |---- index.css
+        |   |---- index.js
+        |   |---- logo.svg             <== 파일 삭제
+        |   |---- reportWebVitals.js
+        |   `---- setupTests.js
+        |---- package.json
+        `---- README.md
+
+        # 폴더 생성
+        $ mkdir -p src/components \
+                   src/pages
+
+        # 사용하지 않는 파일 삭제
+        $ rm src/App.css \
+             src/App.test.js \
+             src/logo.svg
+
+        # 파일 생성
+        $ touch src/components/About.js \
+                src/components/Home.js \
+                src/components/Memo.js \
+                src/components/Topics.js \
+                src/components/TopicDetail.js \
+                src/components/MenuHome.js \
+                src/pages/PageHome.js
+
+    ##################################
+    step 3. 라우팅 설정
+    ##################################
+
+    step 3-1. 폴더 및 파일 생성
+    $ mkdir -p ./src/pages
+    $ touch src/pages/PageHome.js
+
+    step 3-2. src/index.js 수정
+        변경 전
+        ReactDOM.render(
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>,
+            document.getElementById('root')
+        );
+
+
+        변경 후
+        import { BrowserRouter } from "react-router-dom";
+        ReactDOM.render(
+            <React.StrictMode>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </React.StrictMode>,
+            document.getElementById("root")
+        );
+
+    step 3-3. src/App.js 수정
+        import PageHome from './pages/PageHome';
+        function App() {
+            return (
+                <div>
+                    <PageHome />
+                </div>
+            );
+        }
+
+
+    ##################################
+    step 4. 컴포넌트 만들기
+    ##################################
+        About
+        Home
+        Memo
+        Topics
+        TopicDetail
+        MenuHome
+        PageHome
+        App
+
+    step 4-1. About 컴포넌트 만들기
+        <div>
+            <h2 style={{}}> About</h2>
+            <p>
+                안녕하세요. 저는 "{this.props.match.params.name}" 입니다.
+            </p>
+        </div>
+
+    step 4-2. Home 컴포넌트 만들기
+        <div>
+            <h2>Home</h2>
+        </div>
+
+    step 4-3. Memo 컴포넌트 만들기
+        <div>
+            <h2>Memo</h2>
+            <p>
+                안녕하세요. 저는 {this.props.match.params.name} 입니다.
+            </p>
+        </div>
+
+    step 4-4. Topics 컴포넌트 만들기
+        src/components/Topics
+
+        <div>
+            <h2>Topics</h2>
+        </div>
+
+    step 4-5. TopicDetail 컴포넌트 만들기
+        src/components/TopicDetail
+
+        <div>
+            <h2>Home</h2>
+        </div>
+
+    step 4-6. MenuHome 컴포넌트 만들기
+        src/components/Menu
+        메뉴 설정을 할 때는 Link나 NavLink 컴포넌트를 사용해야 한다. a 태그 사용하면 안됨
+        NavLink 컴포넌트는 Link 컴포넌트에 active를 적용할 수 있는 컴포넌트다.
+
+        <div>
+            <ul>
+                <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/">Home</NavLink></li>
+                <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/memo">Memo</NavLink></li>
+                <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/topics">Topics</NavLink></li>
+                <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/about">소개</NavLink></li>
+                <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/about/react">소개 >> react</NavLink></li>
+            </ul>
+            <div>
+                <p>메뉴 설정을 할 때는 Link나 NavLink 컴포넌트를 사용해야 한다. a 태그를 사용하면 안됨</p>
+                <p>NavLink 컴포넌트는 Link 컴포넌트에 active 기능이 추가된 컴포넌트다.</p>
+            </div>
+        </div>
+
+
+    step 4-7. PageHome 컴포넌트 수정
+        src/pages/PageHome
+        <div>
+            <MenuHome />
+            <ul>
+                <h2>URL 테스트</h2>
+                <li><a rel="noreferrer" target="_blank" href="/">http://localhost:3000/</a></li>
+                <li><a rel="noreferrer" target="_blank" href="/about">http://localhost:3000/about</a></li>
+                <li><a rel="noreferrer" target="_blank" href="/about/first">http://localhost:3000/about/first</a></li>
+                <li><a rel="noreferrer" target="_blank" href="/about/first/second">http://localhost:3000/about/first/second</a></li>
+                <li><a rel="noreferrer" target="_blank" href="/about/first/second/third">http://localhost:3000/about/first/second/third</a></li>
+                <li><a rel="noreferrer" target="_blank" href="/about/name?color=red">http://localhost:3000/about/name?color=red</a></li>
+            </ul>
+
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/memo" element={<Memo />} />
+                <Route path="/topics/*" element={<Topics />} />
+                <Route path="/about/:name/:name2" element={<About />}></Route>
+                <Route path="*" to="/" />
+            </Routes>
+        </div>
+
+
+    step 4-8. App.js 수정
+
+    <div>
+        <PageHome />
+    </div>
+
+
+    </xmp>
+
+</body>
+</html>
