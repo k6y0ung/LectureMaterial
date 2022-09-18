@@ -1,0 +1,9 @@
+변수
+todoItems:[]
+
+함수
+checked(done)
+doneToggle(id)
+removeTodo(id)
+
+컴포넌트

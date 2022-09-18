@@ -47,7 +47,7 @@
     2. Vue-CLI 프로젝트 생성 및 설정 작업
     ##################################
 
-    step 2-03. node, npm 버전 확인
+    step 2-02. node, npm 버전 확인
         $ node -v
         v16.16.0
 
@@ -56,6 +56,9 @@
 
         $ npx -v
         8.18.0
+
+    step 2-03. vue cli 설치
+        $ npm install --global @vue/cli
 
     step 2-04. 현재 폴더의 파일 목록 조회
         $ ls
@@ -283,11 +286,13 @@
         }
 
 
-    step 4-03. 프로젝트 전체 소스에 lint 적용
+    step 4-03. 프로젝트 전체 소스에 새로운 lint 설정 적용하기
     $ ls
 
     $ npm run lint
 
+
+    step 4-04. 서버 재시작
 
 
     ##################################
@@ -380,7 +385,7 @@
             </div>
         </template>
 
-    src/components/Vue4301Comp.vue 생성
+    src/components/vue4301/Vue4301Comp.vue 생성
         <template>
             <div id="app">
                 <h1>{{header}}</h1>
@@ -436,7 +441,7 @@
         $ ls
         babel.config.js  jsconfig.json  node_modules/  package.json  package-lock.json  public/  README.md  src/  vue.config.js
 
-        # 디렉토리 생성
+        # modules 디렉토리 생성
         $ mkdir -p ./src/store/modules
 
     작업2-2. store 파일 생성
@@ -494,7 +499,7 @@
         import { createStore } from 'vuex';
 
         // 작성한 모듈을 가져옵니다.
-        import counterStore from '@/store/modules/counterStore.js'
+        import counterStore from './modules/counterStore.js'
 
         export default createStore({
             // actions: {},
@@ -502,7 +507,7 @@
             // state: {},
             // getters: {},
             modules: {
-              // "키: 값", 형태로 저장됩니다.
+              // "모듈명: store명", 형태로 저장됩니다.
               counterStore: counterStore,
             },
         });
@@ -516,7 +521,11 @@
         import router from './router';
         import store from './store';
 
-        createApp(App).use(store).use(router).mount('#app');
+        createApp(App)
+        .use(store)
+        .use(router)
+        .mount('#app')
+        ;
 
 
 
@@ -546,6 +555,8 @@
     ##################################
 
     3-1. store.counterStore.state 작성
+        파일명: src/store/modules/counterStore.js
+
         vue 인스턴스 data 의 welcome과 counter를 vuex store 로 옮기기.
         state: {
             /* vue인스턴스나 컴포넌트의 data 프로퍼티에 해당 */
@@ -568,12 +579,14 @@
                 return state.counter;
             },
         },
-    3-3. Vue4301Comp 컴포넌트의 computed 에서 store.counterStore.getters 값을 가져오도록 작성
+    3-3. Vue4301Comp 컴포넌트의 computed 에서
+        this.$store.counterStore.getters 값을 가져오도록 작성
         computed: {
             ...mapGetters('counterStore', ['welcome', 'counter']),
         },
 
-
+    3-4. mapGetters import 설정
+        import { mapActions, mapMutations, mapState, mapGetters } from 'vuex';
 
 
     ##################################
