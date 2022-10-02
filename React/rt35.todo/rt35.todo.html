@@ -567,24 +567,24 @@
     ##################################
 
     step 26-1. TodoList 의 JSX에
-        li 태그에 DoneToggle onClick 설정한다.
+        li 태그에 onClick 설정한다.
 
         const lis = todoItems && todoItems.map((item) => {
-        return (
-          <li
-              key={item.id}
-              className={item.done ? 'checked' : null}
-              data-id={item.id}
-              data-item={JSON.stringify(item)}
-              onClick={callbackDoneToggle}
-          >
-              <i aria-hidden="true" className="checkBtn fas fa-check"></i>
-              {item.todo}
-              <span type="button" className="removeBtn">
-                  <i aria-hidden="true" className="far fa-trash-alt"></i>
-              </span>
-          </li>
-            );
+          return (
+            <li
+                key={item.id}
+                className={item.done ? 'checked' : null}
+                data-id={item.id}
+                data-item={JSON.stringify(item)}
+                onClick={handlerDoneToggle}
+            >
+                <i aria-hidden="true" className="checkBtn fas fa-check"></i>
+                {item.todo}
+                <span type="button" className="removeBtn">
+                    <i aria-hidden="true" className="far fa-trash-alt"></i>
+                </span>
+            </li>
+          );
         });
 
     step 26-2. TodoList 에 handlerDoneToggle handler 작성
@@ -594,9 +594,11 @@
             //
             const id = Number(e.target.dataset.id);  // data-id
             const item = JSON.parse(e.target.dataset.item);  // data-item
-            e.stopPropagation();
 
-             callbackDoneToggle(id);
+            e.stopPropagation(); // click 이벤트 취소. 버블링 막기
+
+            // 부모 콜백 메서드 호출
+            callbackDoneToggle(id);
         };
 
     step 26-3. TodoList 컴포넌트에 props 설정
@@ -630,7 +632,7 @@
                         return item;
                     });
 
-                setTodoItems(newTodos);
+                setTodoItems(newTodos); // todoItems = newTodos;
             },
             [todoItems]
         );
@@ -677,7 +679,8 @@
             todoItems={todoItems}
             callbackDoneToggle={callbackDoneToggle}
             callbackRemoveTodo={callbackRemoveTodo}
-        ></TodoList>
+        >
+        </TodoList>
 
     step 27-05. TodoContainer 컴포넌트에 callbackRemoveTodo 메서드 작성
         const callbackRemoveTodo = useCallback(
@@ -741,7 +744,7 @@
                             <h3 slot="header">경고</h3>
                         </div>
 
-                        <div className="modal-footer" onClick={handlerShowModal}>
+                        <div className="modal-footer">
                             <span>
                                 할 일을 입력하세요.
                                 <i
@@ -755,7 +758,7 @@
             </div>
         )}
 
-    step 28-08. <div className="modal-footer"> 에 onclick 이벤트를 추가하시오.
+    step 28-08. <div className="modal-footer"> 에 onClick 이벤트를 추가하시오.
         변경전:
         <div className="modal-footer">
             ... 중략
@@ -796,7 +799,7 @@
     step 28-11. refInputTodo 만들기
             const refInputTodo = useRef();
 
-    step 28-12. TodoInput 컴포넌트 JSX 에 onKeyUp 기능 추가
+    step 28-12. TodoInput 컴포넌트 JSX 의 input 에 onKeyUp 기능 추가
         input 태그에서 enter 가 입력되면
         <input
             type="text"
@@ -814,21 +817,51 @@
         </span>
 
     step 28-14. TodoInput 컴포넌트 handlerAddTodo 메서드 작성
-        // click 이벤트 취소. 버블링 방지
-        // input 에 입력된 값을 가져오기. 어떻게 해야 하나? ==> ref명.current.value
-        // input 태그에 빈 문자열이 입력 되는 경우는 modal 창이 출력되게
-        // TodoContainer 의 callbackAddTodo 메서드 호출 기능 추가
-        // add 후에 input 태그의 입력 값 지우기.
+        cosnt handlerAddTodo = (e) => {
+
+            // click 이벤트 취소. 버블링 방지
+            e.stopPropagation();
+
+            // input 에 입력된 값을 가져오기. 어떻게 해야 하나? ==> ref명.current.value
+            const value = refInputTodo.current.value;
+
+            // input 태그에 빈 문자열이 입력 되는 경우는 modal 창이 출력되게
+            if( !value ) {
+              return; // 함수 실행을 멈춘다.
+            }
+            // TodoContainer 의 callbackAddTodo 메서드 호출 기능 추가
+            callbackAddTodo( value );
+
+            // add 후에 input 태그의 입력 값 지우기.
+            refInputTodo.current.value = '';
+        }
 
     step 28-15.  TodoContainer 컴포넌트 JSX에 callbackAddTodo props 설정
         <TodoInput callbackAddTodo={callbackAddTodo}>
         </TodoInput>
 
     step 28-16. TodoContainer 컴포넌트에 callbackAddTodo 메서드 작성
+
+    const callbackAddTodo = useCallback( (value)=>{
         // ap03-11.객체배열.html 참조
         // map과 reduce 를 사용하여 max id 구하기 ==> newid 만들기
         // todoItems 추가할 객체 만들기
         // 배열에 추가
+        const maxid = todoItems &&
+                    todoItems
+                    .map( (item)=>item.id )
+                    reduce((pvalue,cvalue)=> (pvalue>cvalue ? pvalue: cvalue), 0);
+
+        const newTodo = {
+          id: maxid + 1,
+          todo: value,
+          done: false,
+        }
+
+        setTodoItems( [...todoItems, newTodo] ); // todoItems = [...todoItems, newTodo];
+      },
+      [todoItems]
+    };
 
 
 
