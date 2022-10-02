@@ -45,17 +45,25 @@
         4.x :
         5.x : <== 최신 버전
 
+    Vue-CLI 설치:
+        npm install --global @vue/cli  <== global 설치
+        npm install          @vue/cli  <== local 설치
 
-    Vue-CLI 플러그인 추가
-        vue add 플러그인명.             예시) npx vue add vuex
-        npm install --save 플러그인명.  예시) npm install --save vuex
+    Vue-CLI 버전 확인 :
+        vue -V      <== global 설치인경우
+        또는
+        npx vue -V   <== local 로컬설치인경우
 
 
     ##################################
     2. Vue-CLI 프로젝트 생성 및 설정 작업
     ##################################
+    
+    step 2-01. Vue-CLI 전역 설치 삭제
+        --global 는 전역을 의미한다.
+        $ npm uninstall --global @vue/cli
 
-    step 2-03. node, npm 버전 확인
+    step 2-02.node, npm, vue 버전 확인
         $ node -v
         v16.16.0
 
@@ -64,6 +72,17 @@
 
         $ npx -v
         8.18.0
+
+    step 2-03. vue cli 설치
+        $ npm install --global @vue/cli
+
+        # global 설치인 경우 Vue-CLI 버전 확인 :
+        $ vue -V
+        @vue/cli 5.0.1
+
+        # local 설치인 경우 Vue-CLI 버전 확인 :
+        $ npx vue -V
+        @vue/cli 5.0.1
 
     step 2-04. 현재 폴더의 파일 목록 조회
         $ ls
@@ -187,14 +206,14 @@
         |   `-- favion.ico
         |-- src                      # 소스 코드 폴더
         |   |-- assets               # 이미지, CSS, 기타 자원 파일
-        |   |   `--  logo.png
+        |   |   `-- logo.png
         |   |-- components           # 컴포넌트
-        |   |   `--  HelloWorld.vue
+        |   |   `-- HelloWorld.vue
         |   |-- router               # 라우터
-        |   |   `--  index.js
+        |   |   `-- index.js
         |   |-- views                # 라우터 페이지
-        |   |   |--  About.vue
-        |   |   `--  Home.vue
+        |   |   |-- About.vue
+        |   |   `-- Home.vue
         |   |-- App.vue
         |   `-- main.js
         |-- .browserslistrc
@@ -291,11 +310,13 @@
         }
 
 
-    step 4-03. 프로젝트 전체 소스에 lint 적용
+    step 4-03. 프로젝트 전체 소스에 새로운 lint 설정 적용하기
     $ ls
 
     $ npm run lint
 
+
+    step 4-04. 서버 재시작
 
 
     ##################################
@@ -657,7 +678,7 @@
         Child 컴포넌트에서  + 버튼을 클릭하면 +1씩 카운터가 올라가고
         Child 컴포넌트에서  - 버튼을 클릭하면 -1씩 카운터가 감소됩니다.
 
-    상위 컴포넌트(Parent)와 자식 컴포넌트(Child)는 같은 값을 갖습니다.
+    상위 컴포넌트(Parent)와 자식 컴포넌트(Child)는 같은 counter 값을 갖습니다.
     Parent 컴포넌트 에서 Child 컴포넌트 로 데이터를 전달할 때 props 속성을 사용하여 데이터를 전달합니다.
     따라서, 부모 컴포넌트(Parent)와 자식 컴포넌트(Child)는 같은 값을 갖습니다.
 
@@ -671,7 +692,7 @@
             Child 컴포넌트가 화면에 표시되도록 작성한다.
         3. 2번이 되면 Child 컴포넌트에 props를 통해 값을 내려받게 작성 한다.
             <component-child v-bind:num="counter" />
-            부모의 counter를 자식에서 num 으로 받는다.
+            의미: 부모의 counter 변수를 자식에서는 num 변수로 받는다.
         4. 사용자 이벤트를 사용하여 Child 컴포넌트에서
             Parent 컴포넌트로 값을 전달되게 한다.
             this.$emit( "이벤트명", 전달값)
@@ -766,7 +787,7 @@
     </template>
 
     src/components/vue3501/Vue3501Comp.vue 생성(컴포넌트)
-    <style>
+    <style scoped>
         input:focus {
           background-color: lightskyblue;
           border: 3px solid #555;

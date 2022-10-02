@@ -3,10 +3,10 @@
     스프레드 사용법을 학습한다.
 
     ES 5에서는
-    arguments 매개변수는 유사 배열 객체다.
+    arguments 매개변수는 유사 배열 객체다.
         length 프로퍼티가 있다.
         Array  메서드를 사용할 수 없다.
-        arrow function에서는 arguments는 사용할 수 없다.
+        arrow function에서는 arguments는 사용할 수 없다.
 
     ES2015 에서는
     rest 매개변수는 배열이다.
@@ -20,7 +20,6 @@
 
 */
 
-debugger;
 // 배열을 개별 변수로 만든.
 const cities = ['서울', '부산', '제주'];
 const x = cities[0]; // '서울'
@@ -39,3 +38,31 @@ console.log(east.concat(west)); // ["U", "K", "T", "N", "C", "G"]
 
 const countries = [...east, ...west]; // ... : spread 연산자
 console.log(countries);
+
+const car1 = {
+  type: 't1',
+  color: 'S1',
+  model: 2017,
+};
+const car2 = {
+  type: 't2',
+  color: 'S2',
+  model: 2019,
+};
+
+const { type } = car1;
+console.log(type); // t1
+
+const func = function ({ type }) {
+  console.log(type); // type 값은 무엇인가?
+};
+func({ ...car1, ...car2 });
+
+debugger;
+function childComponent(...props) {
+  // callee
+  console.log(props); // props 에 출력되는 값은 무엇인가?
+}
+
+const message = 'passed from Parent Component';
+value = childComponent(...message); // caller

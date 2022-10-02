@@ -1,15 +1,14 @@
 {
-    "printWidth": 80,
-    "tabWidth": 2,
-    "singleQuote": true,
-    "semi": true,
-    "useTabs": false,
-    "trailingComma": "all",
-    "proseWrap": "always",
-    "requireConfig": false,
-    "bracketSpacing": true,
-    "jsxBracketSameLine": false,
-    "jsxSingleQuote": false,
-    "quoteProps": "as-needed",
-    "endOfLine": "crlf"
+  "printWidth": 130,
+  "tabWidth": 2,
+  "singleQuote": true,
+  "semi": true,
+  "useTabs": false,
+  "trailingComma": "all",
+  "proseWrap": "always",
+  "bracketSpacing": true,
+  "jsxSingleQuote": false,
+  "jsxBracketSameLine": false,
+  "quoteProps": "as-needed",
+  "endOfLine": "crlf"
 }

@@ -28,7 +28,6 @@ export default {
       console.log(arguments);
       // console.log(rest);
 
-      debugger;
       // this.$data.mesg = `인자1=${rest[0]}, 인자2=${rest[1]}`;
       this.$data.mesg = `인자1=${param0}, 인자2=${param1}`;
     },

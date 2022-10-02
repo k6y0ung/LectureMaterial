@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
 
-    <link rel="stylesheet" href="../css/reset.css"/>
-</head>
+    <link rel="stylesheet" href="../css/reset.css" />
+  </head>
 
-<body>
+  <body>
     <xmp>
         HelloWorldContainer, HelloWorld 컴포넌트를 만들고
         props를 사용하여 인자를 넘겨 받는 방법을 복습한다.
@@ -33,27 +32,77 @@
         작업 3. JSX 반복문을 사용하는 방법을 적용하여 본다.
         다음 장에서 학습할 rt12-11.JSX.반복문 을 참조하여 작성하시오
 
+        HelloWorldContainer JSX
+        <div>
+            <HelloWorld></HelloWorld>
+            <HelloWorld></HelloWorld>
+            <HelloWorld></HelloWorld>
+            <HelloWorld></HelloWorld>
+        </div>
+
         HelloWorld JSX
         <div>
-            Hello, react world!!! {props.index} - component
+            Hello, react world!!! - component
         </div>
 
 
         HelloWorldContainer JSX
         ==> 어떻게 만들면 될까?
     </xmp>
-    <hr>
+    <hr />
 
-    <div id="app">
-        요기에
-    </div>
-</body>
-
+    <div id="app">요기에</div>
+  </body>
 </html>
 
+<script src="https://unpkg.com/@babel/standalone/babel.js" crossorigin="anonymous">
+  /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="http://unpkg.com/react@17/umd/react.development.js" crossorigin="anonymous">
+  /* import React, { Component, PureComponent } from 'react' */
+</script>
+<script src="http://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin="anonymous">
+  /* import ReactDOM from 'react-dom' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.js" crossorigin="anonymous"></script>
+<script src="http://unpkg.com/react-is@17/umd/react-is.development.js" crossorigin="anonymous"></script>
+<script src="http://unpkg.com/styled-components@5/dist/styled-components.js" crossorigin="anonymous">
+  /*  import styled, { css } from 'styled-components' */
+</script>
+<script type="text/babel">
+  const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;
 
+  // 화면에 붙이기
+  ReactDOM.render(<HelloWorldContainer></HelloWorldContainer>, document.getElementById('app'));
 
+  // HelloWorldContainer 만들기. rfc
+  function HelloWorldContainer({ ...props }) {
+    // useState 를 사용한 컴포넌트의 상태값 설정
+    const [배열명, set배열명] = useState([1, 2, 3, 4]); // 상태값이 기본타입인 경우
 
+    // 이벤트 핸들러 작성.
+    const handler = () => {
+      // 상태변경
+      // 배열명.push( 배열명.length + 1 ) === [...배열명, 배열명.length + 1]
+      set배열명([...배열명, 배열명.length + 1]);
+    };
 
+    // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
+    const hellowords = 배열명.map((value, index, array) => {
+      return <HelloWorld index={value}></HelloWorld>;
+    });
+    return (
+      <Fragment>
+        HelloWorldContainer
+        <button onClick={handler}>추가</button>
+        {hellowords}
+      </Fragment>
+    );
+  }
 
-
+  // HelloWorld 만들기.
+  function HelloWorld({ index }) {
+    // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
+    return <div>Hello, react world!!! {index} - component</div>;
+  }
+</script>

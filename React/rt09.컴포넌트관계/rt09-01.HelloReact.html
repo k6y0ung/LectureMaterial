@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible"
+      content="ie=edge" />
     <title>Document</title>
 
-    <link rel="stylesheet" href="../css/reset.css"/>
+    <link rel="stylesheet"
+      href="../css/reset.css" />
 
-</head>
+  </head>
 
-<body>
+  <body>
     <xmp>
         함수형 컴포넌트를 만드는 방법을 복습한다.
 
@@ -53,12 +56,93 @@
     <hr>
 
     <div id="app">
-        요기에
+      요기에
     </div>
-</body>
+  </body>
 
 </html>
 
 
+<script src="https://unpkg.com/@babel/standalone/babel.js"
+  crossorigin="anonymous">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+  </script>
+<script src="http://unpkg.com/react@17/umd/react.development.js"
+  crossorigin="anonymous">
+    /* import React, { Component, PureComponent } from 'react' */
+  </script>
+<script src="http://unpkg.com/react-dom@17/umd/react-dom.development.js"
+  crossorigin="anonymous">
+    /* import ReactDOM from 'react-dom' */
+  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.js"
+  crossorigin="anonymous">
+  </script>
+<script src="http://unpkg.com/react-is@17/umd/react-is.development.js"
+  crossorigin="anonymous">
+  </script>
+<script src="http://unpkg.com/styled-components@5/dist/styled-components.js"
+  crossorigin="anonymous">
+    /*  import styled, { css } from 'styled-components' */
+  </script>
+<script type="text/babel">
+
+  const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;
+
+  // 컴포넌트 만들기
+  // 컴포넌트 화면에 붙이기
 
 
+  ReactDOM.render(
+    <HelloContainer></HelloContainer>, document.getElementById('app')
+  );
+
+  function HelloContainer({ ...props }) {
+    const [mesgOfProps, setMesgOfProps] = useState("부모에 넘져준 값");
+
+    // callback 메서드 작성. callback 메서드는 부모의 공유 상태값을 변경하기 위해서 사용된다.
+    const callback = useCallback((param) => {
+      // state 변경
+      debugger;
+      setMesgOfProps('자식에서 값을 바꿈')
+    }, [/* 조건 제어: 메서드와 연관되는 상태(변수)명들을 기술 */ mesgOfProps]);
+
+    return (
+      <div>
+        HelloContainer
+        <HelloReact
+          mesgOfProps={mesgOfProps}
+          callback={callback}
+        >
+        </HelloReact>
+      </div>
+    )
+  }
+  // const { mesgOfProps, callback } = props;
+  function HelloReact({ mesgOfProps, callback }) {
+    // useState 를 사용한 컴포넌트의 상태값 설정
+    const [mesgOfState, setMesgOfState] = useState('Hello, State!!!'); // 상태값이 기본타입인 경우
+
+    // 이벤트 핸들러 작성.
+    const handler = () => {
+      // 이벤트 핸들러는 화살표 함수로 만든다
+      console.log(window.event.target);
+      debugger;
+      // 부모 컨테이너의 콜백 메서드 호출. HelloContainer.callback();
+      callback();
+    };
+
+    // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
+    return (
+      <div>
+        도전1. Hello, React!!!
+        <br />
+        도전2. {mesgOfState}
+        <br />
+        도전3. {mesgOfProps}
+        <hr />
+        <button onClick={handler}> 부모의 callback 메서드 호출</button>
+      </div>
+    )
+  }
+</script>

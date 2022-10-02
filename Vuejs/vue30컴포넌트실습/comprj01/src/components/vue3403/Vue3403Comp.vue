@@ -20,7 +20,6 @@ export default {
       console.log(e.target);
       // show-log 라는 사용자 이벤트를 발생시키고
       // "abc" 와 123 을 값으로 전달하시오
-      debugger;
       this.$emit('show-log', 'abc', 123);
     },
   },
