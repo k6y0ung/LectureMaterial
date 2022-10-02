@@ -51,6 +51,32 @@
             height: 63px;
             width: 228px;
         }
+
+        만들 React 컴포넌트명 : CompStyle
+        만들 Styled 컴포넌트 : StyledDiv, StyledCircle, 단축키: styled
+
+        $ ls
+        $ mkdir  -p ./src/containers/styled
+        $ touch ./src/containers/styled/CompStyle.js
+
+        # src/cApp.js 수정한다.
+        import  CompStyle from './src/containers/styled/CompStyle';
+
+        function App(){
+          return(
+            <div>
+              <CompStyle></CompStyle>
+            </div>
+          );
+        }
+
+        index.html  ==>  link:css  ==> 사이트 전체 스타일링
+
+        index.js    ==> index.css  ==> 사이트 전체 스타일링
+
+        App.js      ==> App.css    ==> 사이트 전체 스타일링
+
+        만든컴포넌트.js  ==> 컴포넌트 스타일링(styled-components)
     </xmp>
     <hr />
 

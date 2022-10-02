@@ -66,6 +66,7 @@
 <script type="text/babel">
 
   const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;
+
   ReactDOM.render(<Loop3></Loop3>, document.getElementById('wrap3'));
 
   function Loop3({ ...props }) {
@@ -73,10 +74,9 @@
     const [elements, setElements] = useState(['one', 'two', 'three']); // 상태값이 기본타입인 경우
 
     // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
-    const lis = elements.map((item) => {
-      return (<li>{item}</li>);
+    const lis = elements.map((item, index) => {
+      return (<li key={index}>{item}</li>);
     });
-
     return (
       <div>
         <ul>

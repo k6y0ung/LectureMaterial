@@ -22,7 +22,7 @@
     </div>
 
     <xmp>
-    React CLI 을 사용하여 reactprj01 어플리케이션을 만들어 본다.
+    React CRA 을 사용하여 reactprj01 어플리케이션을 만들어 본다.
 
 
 
@@ -56,7 +56,7 @@
 
     step 1-02. 프로젝트 생성
 
-        $ npm uninstall -g create-react-app    # 전역으로 설치된 create-react-app 모듈 삭제하기
+        $ npm uninstall -g create-react-app    # 전역으로 설치된 CRA(create-react-app) 모듈 삭제하기
 
         $ npx clear-npx-cache                  # npx 로 다운로드된 캐쉬되어 있는 모듈 삭제
         Need to install the following packages:
@@ -73,11 +73,11 @@
         책 읽기
         ...
 
-        $ ls                                       # reactprj01 폴더가 보이는지 확인
+        $ ls               # reactprj01 폴더가 보이는지 확인
 
-        $ cd reactprj01                            # reactprj01 폴더로 이동
+        $ cd reactprj01    # reactprj01 폴더로 이동
 
-        $ ls                                       # package.json 파일이 보이는지 확인
+        $ ls               # package.json 파일이 보이는지 확인
 
         $ npm help
         $ npm help install
@@ -85,7 +85,8 @@
 
         $ npm help ls
         $ npm ls -h
-        $ npm ls react z┬ @testing-library/react@13.4.0
+        $ npm ls react       # 설치된 react 버전 확인
+        ├─┬ @testing-library/react@13.4.0
         │ └── react@18.2.0 deduped
         ├─┬ react-dom@18.2.0
         │ └── react@18.2.0 deduped
@@ -141,10 +142,10 @@
 
 
     step 1-24. 리덕스 설치(필수)
-        redux : redux를 사용할 수있게 하는 라이브러리
-        react-redux : react에서 redux를 사용할 수있게 하는 라이브러리
-        redux-actions : redux용 action을 정의하기 위한 라이브러리
-        redux-logger : redux용 로깅 처리를 위한 미들웨어 라이브러리
+        redux : redux를 사용할 수있게 하는 라이브러리(필수)
+        react-redux : react에서 redux를 사용할 수있게 하는 라이브러리(필수)
+        redux-actions : redux용 action을 정의하기 위한 라이브러리(선택)
+        redux-logger : redux용 로깅 처리를 위한 미들웨어 라이브러리(선택)
 
         $ npm install --save redux react-redux redux-logger redux-actions
 
@@ -220,6 +221,9 @@
 
 
 
+    41. package.json 에 있는 라이브러리 재설치
+    $ npm intall
+
 
     ##################################
     2. 배포 테스트
@@ -242,7 +246,7 @@
 
 
     ##################################
-    3. 프로젝트 환경 설정
+    4. 프로젝트 환경 설정
        소요시간: 15분
     ##################################
 
@@ -364,7 +368,7 @@
         # .prettierrc.js 파일을 프로젝트 루트에 만들기
         $ pwd     # 현재 작업하는 폴더 위치 확인
         $ ls -a   # package.json 파일이 보이는지 확인
-        $ touch .prettierrc.js
+        $ touch .prettierrc.js    # 파일 생성
         $ echo -e "module.exports = {\n}" > .prettierrc.js
         $ cat .prettierrc.js
 
@@ -405,14 +409,14 @@
 
         # .eslintrc.js 파일을 프로젝트 루트에 만들기
         $ pwd     # 현재 작업하는 폴더 위치 확인
-        $ ls      # package.json 파일이 보이는지 확인
+        $ ls -a   # package.json 파일이 보이는지 확인
 
         eslint 설정 방법에는 2가지가 있다.
             * npm init 을 사용하는 설정 방식(비추천)
             * npm install 을 사용하는 설정 방식(추천)
 
         # 방법1. npm init 을 사용하는 설정 방식(비추천)
-        $ npm init @eslint/config  # .eslintrc.js 파일을 생성.
+        $ npm init @eslint/config     # .eslintrc.js 파일을 생성.
             ? How would you like to use ESLint? ...
                 To check syntax only
               > To check syntax and find problems
@@ -434,11 +438,6 @@
             ? How would you like to define a style for your project? ...
               > Use a popular style guide
                 Answer questions about your style
-            ? Which style guide do you want to follow? ...
-              > Airbnb: https://github.com/airbnb/javascript
-                Standard: https://github.com/standard/standard
-                Google: https://github.com/google/eslint-config-google
-                XO: https://github.com/xojs/eslint-config-xo
             ? What format do you want your config file to be in? ...
               > JavaScript
                 YAML
@@ -576,7 +575,7 @@
 
 
 
-    4-7. githook 설정
+    4-7. githook 설치 및 설정
         githook은 git 에 특정 이벤트(커밋, 푸시 등)를 감지하여
         이벤트를 실행하기 전에 특정 동작을 수행할 수 있도록 도와주는 플러그인 입니다.
 
@@ -586,7 +585,7 @@
         . lint-staged와 husky를 사용하여 git 이벤트에 Prettier 명령어를 연동 설정.
 
         commit 전에 자동으로 prettier 적용하기
-        $ npm install --save-dev husky  lint-staged
+        $ npm install --save-dev  husky  lint-staged
 
         packages.json 파일 맨 아래에 내용 추가
         $ cat packages.json

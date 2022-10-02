@@ -58,7 +58,8 @@
   const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;
 
   ReactDOM.render(<Todo></Todo>, document.getElementById('app'));
-  function TOdo({
+
+  function Todo({
     ...props
   }) {
     // useState 를 사용한 컴포넌트의 상태값 설정
@@ -66,23 +67,17 @@
       { id: '001', taskName: "빨래하기", finished: false },
       { id: '002', taskName: "공부하기", finished: true },
       { id: '003', taskName: "게임하기", finished: true },
-    ]); // 상태값이 기본타입인 경우
-
-
+    ]);
 
     // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
-    const list = todoList.map((item) => {
-      return (<li key={item.id}>item.taskName</li>);
+    const lis = todoList.map((item) => {
+      return (<li key={item.id}>{item.taskName}</li>);
     })
-
     return (
       <div>
         {lis}
       </div>
     )
   }
-
-
-
 
 </script>
